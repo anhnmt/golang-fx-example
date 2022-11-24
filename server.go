@@ -49,10 +49,14 @@ func (h *EchoHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (*EchoHandler) Pattern() string {
+	return "/echo"
+}
+
 // NewServeMux builds a ServeMux that will route requests
 // to the given EchoHandler.
-func NewServeMux(echo *EchoHandler) *http.ServeMux {
+func NewServeMux(route Route) *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.Handle("/echo", echo)
+	mux.Handle(route.Pattern(), route)
 	return mux
 }

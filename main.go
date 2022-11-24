@@ -16,7 +16,10 @@ func main() {
 		fx.Provide(
 			NewHTTPServer,
 			NewServeMux,
-			NewEchoHandler,
+			fx.Annotate(
+				NewEchoHandler,
+				fx.As(new(Route)),
+			),
 			zap.NewExample,
 		),
 		fx.Invoke(func(*http.Server) {}),
