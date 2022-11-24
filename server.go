@@ -54,9 +54,10 @@ func (*EchoHandler) Pattern() string {
 }
 
 // NewServeMux builds a ServeMux that will route requests
-// to the given EchoHandler.
-func NewServeMux(route Route) *http.ServeMux {
+// to the given routes.
+func NewServeMux(route1, route2 Route) *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.Handle(route.Pattern(), route)
+	mux.Handle(route1.Pattern(), route1)
+	mux.Handle(route2.Pattern(), route2)
 	return mux
 }
