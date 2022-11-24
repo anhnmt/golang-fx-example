@@ -8,7 +8,11 @@ import (
 
 func main() {
 	fx.New(
-		fx.Provide(NewHTTPServer),
+		fx.Provide(
+			NewHTTPServer,
+			NewServeMux,
+			NewEchoHandler,
+		),
 		fx.Invoke(func(*http.Server) {}),
 	).Run()
 
